@@ -15,7 +15,7 @@ class Angle():
             return self.angle
                 
         except ValueError:
-            print("ValueError!!!")
+            print("ValueError")
                   
     def setDegreesAndMinutes(self, degrees=None):
         methodName="setDegreesAndMinutes:  "
