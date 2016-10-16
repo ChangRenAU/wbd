@@ -87,10 +87,9 @@ class TCurve(object):
             while (i < s):
                 if i % 2 == 1:
                     simpsonNew += 4 * f(i*w,n)
-                    i = i + 1
                 else:
                     simpsonNew += 2 * f(i*w,n)
-                    i = i + 1
+                i = i + 1
             simpsonNew += f(t,n)
             factor = w/3.0
             simpsonNew = simpsonNew * factor
