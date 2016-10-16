@@ -28,7 +28,7 @@ class Angle():
         try:
             tag = degrees.index('d')
             if(tag == 0):
-                raise ValueError
+                raise ValueError(self.className + methodName + "invalid angle")
                        
             nums=str(degrees).split('d')
             start,end = map(float,nums)
@@ -36,16 +36,16 @@ class Angle():
             #degrees should be int 
             tagStart = str(start).find('.0')
             if(tagStart == -1):
-                raise ValueError
+                raise ValueError(self.className + methodName + "invalid angle")
             #minutes should greater than 0
             if("-" in str(end)):
-                raise ValueError
+                raise ValueError(self.className + methodName + "invalid angle")
             
             #minutes must have only one decimal place     
             tagEnd = str(end).find(".")
             if(tagEnd != -1):
                 if((tagEnd == 0) or (len(str(end))-tagEnd > 2)):
-                    raise ValueError
+                    raise ValueError(self.className + methodName + "invalid angle")
             
             if start >= 0.0:
                 self.angle = float((start%360.0 + end/60.0)%360.0)
