@@ -50,16 +50,14 @@ class FixTest(unittest.TestCase):
 #    Sad path
     def test100_910_ShouldRaiseExceptionOnEmptyFileNameParm(self):
         expectedDiag = self.className + "__init__:  "
-        theFix = Fix.Fix()
         with self.assertRaises(ValueError) as context:
-            theFix.__init__("")
+            Fix.Fix("")
         self.assertEquals(expectedDiag, context.exception.args[0][0:len(expectedDiag)]) 
         
     def test100_920_ShouldRaiseExceptionOnIntegerFileNameParm(self):
         expectedDiag = self.className + "__init__:  "
-        theFix = Fix.Fix()
         with self.assertRaises(ValueError) as context:
-            theFix.__init__(12)
+            Fix.Fix(12)
         self.assertEquals(expectedDiag, context.exception.args[0][0:len(expectedDiag)])
 
 #-----------------------------------------------------------------
@@ -139,7 +137,6 @@ class FixTest(unittest.TestCase):
 #            sad path
 #                body tag is missing
 #                body content is empty
-#                body content is nonstring
 #                date tag is missing
 #                date content is not in "yyyy-mm-dd" format
 #                time tag is missing
@@ -158,11 +155,14 @@ class FixTest(unittest.TestCase):
     def test300_010_ShouldReturnSpecificValue(self):
         theFix = Fix.Fix()
         theFix.setSightingFile("sightings.xml")
-        approximatePosition = theFix.getSightings()
-        self.assertEqual(("0d0","0d0"), approximatePosition)
-         
+        theFix.getSightings()
+        myLogFile = open("log.txt",'r')
+        entry = myLogFile.readlines()
+        self.assertNotEqual(-1,entry[-1].find("End of sighting file")) 
+        
     def test300_020_ShouldWriteEndofSightingFileIntoLogFile(self):
         theFix = Fix.Fix()
+        theFix.setSightingFile("sightings.xml")
         theFix.getSightings()
         myLogFile = open("log.txt",'r')
         entry = myLogFile.readlines()
@@ -179,6 +179,15 @@ class FixTest(unittest.TestCase):
         self.assertNotEqual(-1, entry[2].find(expectedSighting1))
         self.assertNotEqual(-1, entry[3].find(expectedSighting2))
         
+    def test300_040_ShouldCalculateAdjustedAltitudeRight(self):
+        expectedAltitude = "15d1.5"
+        theFix = Fix.Fix()
+        theFix.setSightingFile("sightings.xml")
+        theFix.getSightings()
+        myLogFile = open("log.txt",'r')
+        entry = myLogFile.readlines()
+        self.assertNotEqual(-1, entry[2].find(expectedAltitude))
+        
 #     sad path 
   
     def test300_910_ShouldRaiseErrorWithBodyTagMissing(self):         
@@ -194,14 +203,6 @@ class FixTest(unittest.TestCase):
         theFix = Fix.Fix()
         with self.assertRaises(ValueError) as context:
             theFix.setSightingFile("emptybody.xml")
-            theFix.getSightings()
-        self.assertEquals(expectedDiag, context.exception.args[0][0:len(expectedDiag)])
-  
-    def test300_912_ShouldRaiseErrorWithNonStringBody(self):         
-        expectedDiag = self.className + "getSightings:  "
-        theFix = Fix.Fix()
-        with self.assertRaises(ValueError) as context:
-            theFix.setSightingFile("nonstringbody.xml")
             theFix.getSightings()
         self.assertEquals(expectedDiag, context.exception.args[0][0:len(expectedDiag)])
            
@@ -331,6 +332,4 @@ class FixTest(unittest.TestCase):
         with self.assertRaises(ValueError) as context:
             theFix.setSightingFile("wronghorizon.xml")
             theFix.getSightings()
-        self.assertEquals(expectedDiag, context.exception.args[0][0:len(expectedDiag)])             
-
-              
+        self.assertEquals(expectedDiag, context.exception.args[0][0:len(expectedDiag)])
