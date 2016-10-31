@@ -1,2 +1,3 @@
-LOG:	2016-10-24 05:03:13-06:00	Start of log
-LOG:	2016-10-24 05:03:13-06:00	Start of sighting file:	wronghorizon.xml
+LOG:	2016-10-31 04:46:13-06:00	Log file:	/Users/cici/Documents/1semeterSP/workspace/SoftwareProcess/Navigation/test/log.txt
+LOG:	2016-10-31 04:46:13-06:00	Sighting file:	/Users/cici/Documents/1semeterSP/workspace/SoftwareProcess/Navigation/test/sightings.xml
+LOG:	2016-10-31 04:46:13-06:00	Star file:	/Users/cici/Documents/1semeterSP/workspace/SoftwareProcess/Navigation/test/stars.txt
