@@ -370,7 +370,7 @@ class FixTest(unittest.TestCase):
         myLogFile.close()
         
     def test500_040_ShouldCalculateAdjustedAltitudeAndGeographicPositionRight(self):
-        expectedInformation = "Pollux\t2017-04-14\t23:50:14\t15d1.5\t27d59.1"
+        expectedInformation = "Pollux\t2017-04-14\t23:50:14\t15d1.5\t27d59.1\t84d33.4"
         theFix = Fix.Fix()
         theFix.setSightingFile("sightings.xml")        
         theFix.setStarFile("stars.txt")
