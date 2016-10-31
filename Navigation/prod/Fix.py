@@ -17,6 +17,8 @@ class Fix():
         self.starFile = None
         self.sightingList = []
         self.count = 0
+        self.star = None
+        self.shastar = None
         self.aries1 = None
         self.aries2 = None
         
@@ -312,8 +314,7 @@ class Fix():
         for line in lines:   
             if line.find(body) != -1 :
                 bodymatch.append(line.split('\t'))
-            else:
-                self.count += 1
+
         for i in range(1,len(bodymatch)):
             datemin = bodymatch[i-1][1]
             datemax = bodymatch[i][1]
@@ -341,7 +342,7 @@ class Fix():
         GHAaries1 = anAngle.setDegreesAndMinutes(self.aries1)
         GHAaries2 = anAngle.setDegreesAndMinutes(self.aries2) 
         s = self.getSeconds(Stime) 
-        result = GHAaries1 + abs(GHAaries1 - GHAaries2) * (s/3600) + SHAstar
+        result = GHAaries1 + abs(GHAaries1 - GHAaries2) * (s/3600.0) + SHAstar
         anAngle.setDegrees(result)
         longitude = anAngle.getString()        
        
