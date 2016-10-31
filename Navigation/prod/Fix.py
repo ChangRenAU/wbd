@@ -329,7 +329,7 @@ class Fix():
                 arieslines.append(line.strip('\n'))
         ariesfile.close()
         for line in arieslines: 
-            if line.find(date) != -1 or line.find(date_1) != -1:               #print "Then what?"
+            if line.find(date) != -1 or line.find(date_1) != -1:
                 datematch.append(line.split('\t'))        
         for i in range(1,len(datematch)):
             timeStar = datematch[i-1][1]
@@ -339,7 +339,7 @@ class Fix():
                 self.aries1 = aries1[2]
                 self.aries2 = aries2[2] 
         GHAaries1 = anAngle.setDegreesAndMinutes(self.aries1)
-        GHAaries2 = anAngle.setDegreesAndMinutes(self.aries1) 
+        GHAaries2 = anAngle.setDegreesAndMinutes(self.aries2) 
         s = self.getSeconds(Stime) 
         result = GHAaries1 + abs(GHAaries1 - GHAaries2) * (s/3600) + SHAstar
         anAngle.setDegrees(result)
